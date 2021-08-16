@@ -92,6 +92,33 @@ class MainActivity : AppCompatActivity() {
      * This method determines the state and proceeds with the correct action.
      */
     private fun clickLemonImage() {
+
+        if(lemonadeState==SELECT){
+            lemonadeState = SQUEEZE
+            lemonSize= lemonTree.pick()
+            squeezeCount= 0
+
+        }
+
+        else if (lemonadeState==SQUEEZE){
+
+            squeezeCount= +1
+            lemonSize= -1
+        }
+
+        else if(lemonSize== 0){
+            lemonadeState== DRINK
+            lemonSize= -1
+
+        }
+        else if(lemonadeState==DRINK){
+            lemonadeState= RESTART
+        }
+        else if(lemonadeState== RESTART){
+            lemonadeState= SELECT
+        }
+
+
         // TODO: use a conditional statement like 'if' or 'when' to track the lemonadeState
         //  when the the image is clicked we may need to change state to the next step in the
         //  lemonade making progression (or at least make some changes to the current state in the
@@ -123,6 +150,10 @@ class MainActivity : AppCompatActivity() {
 
         // TODO: for each state, the textAction TextView should be set to the corresponding string from
         //  the string resources file. The strings are named to match the state
+
+        if( lemonadeState==SELECT){
+            textAction.text= getString(R.string.lemon_select)
+        }
 
         // TODO: Additionally, for each state, the lemonImage should be set to the corresponding
         //  drawable from the drawable resources. The drawables have the same names as the strings
